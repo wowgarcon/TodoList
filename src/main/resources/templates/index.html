@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html
+	language="ko" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	
+	<head>
+		<meta charset="UTF-8">
+		<title>TODO LIST</title>
+		<th:block th:insert="config/header :: header" ></th:block>
+		<th:block th:insert="config/topbar :: topBar" ></th:block>
+	</head>
+	
+	<body>
+		<th:block th:if="${page != null}">
+			<th:block th:insert="${page}"></th:block>
+		</th:block>
+	</body>
+</html>
