@@ -35,7 +35,7 @@ public class TodoController {
 		return new ResponseEntity<>(todoList, HttpStatus.OK);
 	}
 	//추가하기
-	@PostMapping("/addTodo")
+	@PostMapping("/todo")
 	public ResponseEntity<TodoDAO> addTodo(TodoDAO todo) {
 		try {
 			todo.setId(dataBaseService.generateSequence(todo.SEQUENCE_NAME));
@@ -48,13 +48,13 @@ public class TodoController {
 	}
 	
 	//가져오기
-	@GetMapping("/getTodos")
+	@GetMapping("/todos")
 	public List<TodoDAO> getTodos() {
 		return todoRepository.findAll();
 	}
 	
 	//수정
-	@PutMapping("/editTodo")
+	@PutMapping("/todo")
 	public ResponseEntity<TodoDAO> getTodo(TodoDAO todo) {
 		try {
 			boolean updateResult = dataBaseService.updateData(todo);
@@ -69,7 +69,7 @@ public class TodoController {
 	}
 	
 	//삭제
-	@DeleteMapping("/deleteTodo/{id}")
+	@DeleteMapping("/todo/{id}")
 	public ResponseEntity<String> deleteTodo(@PathVariable long id) {
 		try {
 			todoRepository.deleteById(id);

@@ -7,7 +7,7 @@ let removedEvent = false;
 
 const getTodos = () => {
     $.ajax({
-        url: '/getTodos',
+        url: '/todos',
         type: 'GET'
     })
     .then((data) => {
@@ -60,7 +60,7 @@ const addTodo = () => {
     }
 
     $.ajax({
-        url: '/addTodo',
+        url: '/todo',
         type: 'POST',
         data: obj
     })
@@ -110,7 +110,7 @@ const editText = (e, id) => {
     }
 
     $.ajax({
-        url: '/editTodo',
+        url: '/todo',
         type: 'PUT',
         data: obj
     })
@@ -132,7 +132,7 @@ const editText = (e, id) => {
 
 const deleteTodo = (id) => {
     $.ajax({
-        url: '/deleteTodo/' + id,
+        url: '/todo/' + id,
         type: 'DELETE'
     })
     .then(() => {
