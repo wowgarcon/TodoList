@@ -7,11 +7,13 @@ import java.util.Calendar;
 import lombok.Data;
 
 @Data
-public class CommonDTO {
+public class PageDTO {
 	private String page;
 	
 	//include할 페이지 생성자
-	public CommonDTO() {
-		page = "todoList";
+	public PageDTO() {
+		page = "welcome";
 	}
+	
+	
 }

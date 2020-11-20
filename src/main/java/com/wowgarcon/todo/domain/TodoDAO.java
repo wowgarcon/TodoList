@@ -15,7 +15,7 @@ import lombok.Data;
 
 @Document(collection = "todolist")
 @Data
-public class TodoDAO {
+public class TodoDAO{
 	
 	//dabatase_sequences 컬렉션의 시퀀스 컬럼명
 	@Transient
@@ -25,12 +25,13 @@ public class TodoDAO {
 	private long id;
 	private String userId;
 	private String todoContent;
-	private String createTime;
+	private String createDate;
 	
-	public void setCreateTime() {
+	public void setCreateDate() {
 		SimpleDateFormat formatter = new SimpleDateFormat ("yyyy-MM-dd hh:mm:ss");
 		Date date = new Date();
 		String currentTime = formatter.format(date);
-		this.createTime = currentTime;
+		this.createDate = currentTime;
 	}
+	
 }

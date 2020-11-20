@@ -2,6 +2,7 @@ package com.wowgarcon.todo.service;
 
 import com.wowgarcon.todo.domain.DataBaseSequenceDAO;
 import com.wowgarcon.todo.domain.TodoDAO;
+import com.wowgarcon.todo.repository.TodoRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.FindAndModifyOptions;
@@ -24,6 +25,9 @@ public class DataBaseServiceImpl implements DataBaseService {
 			this.mongoOperations = mongoOperations;
 		}
 		
+		@Autowired
+		private TodoRepository todoRepository;
+		
 		@Override
 		public long generateSequence(String seqName) {
 			DataBaseSequenceDAO counter = mongoOperations.findAndModify(
@@ -39,6 +43,7 @@ public class DataBaseServiceImpl implements DataBaseService {
 		public boolean updateData(TodoDAO todo) {
 			try {
 			    TodoDAO originalTodo = mongoOperations.findById(todo.getId(), TodoDAO.class);
+			    System.out.println(todoRepository.findById(todo.getId()));
 			    originalTodo.setUserId(todo.getUserId());
 			    originalTodo.setTodoContent(todo.getTodoContent());
 			    mongoOperations.save(originalTodo);

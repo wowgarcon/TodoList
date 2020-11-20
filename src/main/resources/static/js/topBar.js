@@ -1,5 +1,5 @@
-let logOut = document.getElementById('logOut');
+let logout = document.getElementById('logout');
 
-logOut.addEventListener('click', () => {
+logout.addEventListener('click', () => {
 
 })

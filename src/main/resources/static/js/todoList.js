@@ -4,10 +4,10 @@ let todoContainer = document.getElementById('todoContainer');
 let removedEvent = false;
 
 //=========================== 메소드 ===============================
-
+//ajax 통신을 별도의 유틸로..
 const getTodos = () => {
     $.ajax({
-        url: '/todos',
+        url: '/todo/todolist',
         type: 'GET'
     })
     .then((data) => {
@@ -60,7 +60,7 @@ const addTodo = () => {
     }
 
     $.ajax({
-        url: '/todo',
+        url: '/todo/todo',
         type: 'POST',
         data: obj
     })
@@ -110,7 +110,7 @@ const editText = (e, id) => {
     }
 
     $.ajax({
-        url: '/todo',
+        url: '/todo/todo',
         type: 'PUT',
         data: obj
     })
@@ -132,7 +132,7 @@ const editText = (e, id) => {
 
 const deleteTodo = (id) => {
     $.ajax({
-        url: '/todo/' + id,
+        url: '/todo/del/' + id,
         type: 'DELETE'
     })
     .then(() => {

@@ -1,10 +1,5 @@
 package com.wowgarcon.todo.controller;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,9 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.wowgarcon.todo.domain.TodoDAO;
 import com.wowgarcon.todo.domain.UserDAO;
-import com.wowgarcon.todo.repository.TodoRepository;
+import com.wowgarcon.todo.repository.UserRepository;
 
 import lombok.extern.java.Log;
 
@@ -26,16 +20,20 @@ import lombok.extern.java.Log;
 @Log
 public class UserController {
 
-	//@Autowired
-	//private ApiServiceImpl apiService;
 	@Autowired
-	private TodoRepository todoRepository;
+	private UserRepository userRepository;
 	
-	@PostMapping("/signUp")
-	public ResponseEntity<Map<String, UserDAO>> signUp(UserDAO user) {
-		Map<String, UserDAO> map = new HashMap<String, UserDAO>();
-		map.put("result", user);
-		return new ResponseEntity<Map<String, UserDAO>>(map, HttpStatus.OK);
+	@PostMapping("/join")
+	public ResponseEntity<UserDAO> signUp(UserDAO user) {
+		System.out.println(user.getCreateDate());
+		user.setCreateDate();
+		
+		System.out.println(user.getUserId());
+		System.out.println(user.getUserName());
+		System.out.println(user.getUserPw());
+		System.out.println(user.getCreateDate());
+		
+		return new ResponseEntity<>(user, HttpStatus.OK);
 	}
 	
 }

@@ -26,6 +26,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
 	compile 'org.projectlombok:lombok'
 	compile 'org.springframework.boot:spring-boot-stater-data-jpa'
+	compile 'org.springframework.security:spring-security-web:4.2.2.RELEASE' 
+	compile 'org.springframework.security:spring-security-config:4.2.2.RELEASE'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	annotationProcessor 'org.projectlombok:lombok'
 	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'

@@ -11,7 +11,7 @@ sendBtn.addEventListener('click', () => {
     }
 
     $.ajax({
-        url: '/api/signUp',
+        url: '/api/join',
         type: 'POST',
         data: obj,
     })
