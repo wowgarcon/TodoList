@@ -20,7 +20,7 @@ import com.wowgarcon.todo.service.DataBaseService;
 import lombok.extern.java.Log;
 
 @RestController
-@RequestMapping("/todo/*")
+@RequestMapping("/api/*")
 @Log
 public class TodoController {
 
@@ -69,12 +69,12 @@ public class TodoController {
 	}
 	
 	//삭제
-	@DeleteMapping("/del/{id}")
-	public ResponseEntity<String> deleteTodo(@PathVariable long id) {
+	@DeleteMapping("/todo")
+	public ResponseEntity<String> deleteTodo(TodoDAO todo) {
 		//httpstatus에서 제공하는 코드의 한계
 		//제안 시 제공할 연동규격서 상에서 다양한 에러의 표현을 위해 
 		try {
-			todoRepository.deleteById(id);
+			todoRepository.deleteById(todo.getId());
 			return new ResponseEntity<>(HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);

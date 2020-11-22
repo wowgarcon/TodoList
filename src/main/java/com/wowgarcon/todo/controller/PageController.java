@@ -38,7 +38,7 @@ public class PageController {
 	
 	@GetMapping("/todo")
 	public String todo(Model model, PageDTO utils) {
-		utils.setPage("todoList");
+		utils.setPage("todolist");
 		
 		model.addAttribute("page", utils.getPage());
 		return "index";

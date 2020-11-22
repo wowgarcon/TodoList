@@ -18,40 +18,37 @@ import java.util.Objects;
 @Service
 public class DataBaseServiceImpl implements DataBaseService {
 
-		private MongoOperations mongoOperations;
-
-		@Autowired
-		public DataBaseServiceImpl(MongoOperations mongoOperations) {
-			this.mongoOperations = mongoOperations;
-		}
-		
-		@Autowired
-		private TodoRepository todoRepository;
-		
-		@Override
-		public long generateSequence(String seqName) {
-			DataBaseSequenceDAO counter = mongoOperations.findAndModify(
-					new Query(new Criteria("_id").is(seqName)), 
-					new Update().inc("seq",1), 
-					new FindAndModifyOptions().returnNew(true).upsert(true),
-					DataBaseSequenceDAO.class);
-			
-			return !Objects.isNull(counter) ? counter.getSeq() : 1;
-		}
-
-		@Override
-		public boolean updateData(TodoDAO todo) {
-			try {
-			    TodoDAO originalTodo = mongoOperations.findById(todo.getId(), TodoDAO.class);
-			    System.out.println(todoRepository.findById(todo.getId()));
-			    originalTodo.setUserId(todo.getUserId());
-			    originalTodo.setTodoContent(todo.getTodoContent());
-			    mongoOperations.save(originalTodo);
-				return true;
-			} catch (Exception e) {
-				return false;
-			}
-
-		}
+	@Autowired
+	private TodoRepository todoRepository;
+	private MongoOperations mongoOperations; //시퀀스 생성용으로 여러번 재사용하기 위해 선언 
 	
+	@Autowired
+	public DataBaseServiceImpl(MongoOperations mongoOperations) {
+		this.mongoOperations = mongoOperations;
+	}
+	
+	@Override
+	public long generateSequence(String seqName) {
+		DataBaseSequenceDAO counter = mongoOperations.findAndModify(
+				new Query(new Criteria("_id").is(seqName)), 
+				new Update().inc("seq",1), 
+				new FindAndModifyOptions().returnNew(true).upsert(true),
+				DataBaseSequenceDAO.class);
+		
+		return !Objects.isNull(counter) ? counter.getSeq() : 1;
+	}
+
+	@Override
+	public boolean updateData(TodoDAO todo) {
+		try {
+		    TodoDAO originalTodo = todoRepository.findById(todo.getId());
+		    originalTodo.setUserId(todo.getUserId());
+		    originalTodo.setTodoContent(todo.getTodoContent());
+		    todoRepository.save(originalTodo);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+
+	}	
 }
