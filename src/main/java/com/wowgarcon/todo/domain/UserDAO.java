@@ -1,26 +1,30 @@
 package com.wowgarcon.todo.domain;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.Collection;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import lombok.Data;
 
 @Document(collection = "user")
 @Data
 public class UserDAO{
+	
+	//dabatase_sequences 컬렉션의 시퀀스 컬럼명
+	@Transient
+    public static final String SEQUENCE_NAME = "users_sequence";
+	
 	@Id
-	private String userId;
-	private String userName;
-	private String userPw;
+	private long id;
+	private String username;
+	private String password;
+	private String email;
+	private String role;
 	private String createDate;
 	
-	public void setCreateDate() {
-		SimpleDateFormat formatter = new SimpleDateFormat ("yyyy-MM-dd hh:mm:ss");
-		Date date = new Date();
-		String currentTime = formatter.format(date);
-		this.createDate = currentTime;
-	}
 }

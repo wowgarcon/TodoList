@@ -26,12 +26,4 @@ public class TodoDAO{
 	private String userId;
 	private String todoContent;
 	private String createDate;
-	
-	public void setCreateDate() {
-		SimpleDateFormat formatter = new SimpleDateFormat ("yyyy-MM-dd hh:mm:ss");
-		Date date = new Date();
-		String currentTime = formatter.format(date);
-		this.createDate = currentTime;
-	}
-	
 }

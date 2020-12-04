@@ -1,24 +1,26 @@
-let userId = document.getElementById('userId');
-let userName = document.getElementById('userName');
-let userPw = document.getElementById('userPw');
-let sendBtn = document.getElementById('send');
+let username = document.getElementById('username');
+let password = document.getElementById('password');
+let email = document.getElementById('email');
+let sendBtn = document.getElementById('sendBtn');
 
 sendBtn.addEventListener('click', () => {
+	
     let obj = {
-        userId : userId.value,
-        userName : userName.value,
-        userPw : userPw.value
+        username : username.value,
+        password : password.value,
+        email : email.value
     }
-
-    $.ajax({
-        url: '/api/join',
-        type: 'POST',
-        data: obj,
-    })
+    
+	ajaxConnect('/api/join', 'POST', obj)
     .then((data) => {
-        console.log('success');
-        alert("Success");
-        location.href = '/';
+    	if(data && data == 200){
+	        console.log('success');
+	        alert("Success");
+	        location.href = '/login';
+    	}else if(data == 409){
+    		alert("Already existed Username");
+    		userId.select();
+    	}
     })
     .catch((error) => {
         alert("Fail");

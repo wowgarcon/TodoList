@@ -2,11 +2,11 @@
 <html language="ko" xmlns:th="http://www.thymeleaf.org">
 
 	<h1>LOGIN</h1>
-	<div>
-		<input type='text' id='userId' placeholder='Id' maxlength='20' required/><br>
-		<input type='password' id='userPw' placeholder='Password' maxlength='20' required/><br>
+	<form action="/loginProcess" method="POST">
+		<input type='text' name='username' placeholder='Id' maxlength='20' required/><br>
+		<input type='password' name='password' placeholder='Password' maxlength='20' required/><br>
 		<button id='loginBtn'>LOGIN</button>
-	</div>
+	</form>
 	
 	<!-- <script src='js/signUp.js'></script> -->
 	

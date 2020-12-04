@@ -4,12 +4,8 @@ let todoContainer = document.getElementById('todoContainer');
 let removedEvent = false;
 
 //=========================== 메소드 ===============================
-//ajax 통신을 별도의 유틸로..
 const getTodos = () => {
-    $.ajax({
-        url: '/todo/todolist',
-        type: 'GET'
-    })
+    ajaxConnect('/api/todolist', 'GET')
     .then((data) => {
         console.log('loadTodos SUCCESS');
         console.log(data);
@@ -59,11 +55,7 @@ const addTodo = () => {
         todoContent : todoInput.value
     }
 
-    $.ajax({
-        url: '/todo/todo',
-        type: 'POST',
-        data: obj
-    })
+    ajaxConnect('/api/todo', 'POST', obj)
     .then((data) => {
         console.log('addTodo SUCCESS');
         console.log(data);
@@ -77,7 +69,6 @@ const addTodo = () => {
 }
 
 const editTodo = (id) => {
-
     let originalTodo = document.getElementById(`todoSpan-${id}`);
     let inputTodo = document.createElement('input');
     inputTodo.value = originalTodo.innerText;
@@ -109,11 +100,7 @@ const editText = (e, id) => {
         todoContent : e.target.value
     }
 
-    $.ajax({
-        url: '/todo/todo',
-        type: 'PUT',
-        data: obj
-    })
+    ajaxConnect('/api/todo', 'PUT', obj)
     .then((data) => {
         console.log('editTodo SUCCESS');
         
@@ -131,10 +118,7 @@ const editText = (e, id) => {
 
 
 const deleteTodo = (id) => {
-    $.ajax({
-        url: '/todo/del/' + id,
-        type: 'DELETE'
-    })
+	ajaxConnect('/api/todo', 'DELETE', {id : id})
     .then(() => {
         console.log('deleteTodo SUCCESS');
         document.getElementById(`todoContentBox-${id}`).remove();
@@ -153,9 +137,7 @@ getTodos();
 //=========================== 이벤트 ===============================
 
 todoInput.addEventListener('keydown', (e) => {
-    if(e.key == 'Enter'){
-        addTodo();    
-    }
+    if(e.key == 'Enter') addTodo()
 })
 
 addBtn.addEventListener('click', () => {

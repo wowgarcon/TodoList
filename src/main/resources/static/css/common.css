@@ -42,10 +42,10 @@
 	color: #999999;
 }
 
-.edit:hover{
+.editIcon:hover{
 	color: #00CFFF;
 }
 
-.delete:hover{
+.deleteIcon:hover{
 	color: #FF7000;
 }

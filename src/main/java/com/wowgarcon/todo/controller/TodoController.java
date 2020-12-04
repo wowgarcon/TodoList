@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.wowgarcon.todo.domain.TodoDAO;
+import com.wowgarcon.todo.domain.UtilDTO;
 import com.wowgarcon.todo.repository.TodoRepository;
 import com.wowgarcon.todo.service.DataBaseService;
 
@@ -26,9 +27,9 @@ public class TodoController {
 
 	@Autowired
 	private TodoRepository todoRepository;
-	
 	@Autowired
 	private DataBaseService dataBaseService;
+	private UtilDTO util = new UtilDTO();
 	
 	//가져오기
 	@GetMapping("/todolist")
@@ -40,13 +41,15 @@ public class TodoController {
 	//추가하기
 	@PostMapping("/todo")
 	public ResponseEntity<TodoDAO> addTodo(TodoDAO todo) {
+		todo.setId(dataBaseService.generateSequence(todo.SEQUENCE_NAME));
+		todo.setCreateDate(util.getCurrentDate());
+		
 		try {
-			todo.setId(dataBaseService.generateSequence(todo.SEQUENCE_NAME));
 			todoRepository.save(todo);
-			return new ResponseEntity<>(todo, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
+		return new ResponseEntity<>(todo, HttpStatus.OK);
 		//리턴값 파라미터로 받아서 한번에 처리
 		//exception의 커스터마이징 처리 공부
 	}

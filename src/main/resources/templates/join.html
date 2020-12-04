@@ -3,11 +3,11 @@
 
 	<h1>JOIN</h1>
 	<div>
-		<form action='/join' method="POST">
-			<input type='text' name='userId' placeholder='Id' maxlength='20' required/><br>
-			<input type='text' name='userName' placeholder='Name' maxlength='20' required/><br>
-			<input type='password' name='userPw' placeholder='Password' maxlength='20' required/><br>
-			<button>SEND</button>
-		</form>
+		<input type='text' name='username' id='username' placeholder='Id' maxlength='20' required/><br>
+		<input type='password' name='password' id='password' placeholder='Password' maxlength='20' required/><br>
+		<input type='text' name='email' id='email' placeholder='Email' maxlength='20' required/><br>
+		<button id="sendBtn">SEND</button>
 	</div>
+	
+	<script src='/js/join.js'></script>
 </html>
